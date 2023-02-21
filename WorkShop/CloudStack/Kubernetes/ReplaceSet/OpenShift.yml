@@ -1,0 +1,46 @@
+
+oc new-app https://github.com/cheruvu1/mslearn-aks-workshop-ratings-web --strategy=docker --name=rating-web
+
+oc set env deploy rating-web API=http://rating-api.my-project.svc.cluster.local:8080
+
+rating-api.my-project.svc.cluster.local:8080
+
+ Environment:
+      API:  http://rating-api.my-project.svc.cluster.local:8080
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-kjnk7 (ro)
+
+
+oc set env deploy rating-web API=rating-api.my-project.svc.cluster.local:8080
+
+
+
+kubectl create -f employee-producer-deployment.yaml
+
+kubectl get deployments
+
+kubectl get replicaset
+
+kubectl get pods
+
+
+curl https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-mac.tar.gz  > openshift-client-mac.tar.gz
+sudo cp openshift-client-mac.tar.gz /usr/local/bin
+cd /usr/local/bin                                 
+sudo gunzip openshift-client-mac.tar.gz 
+sudo tar -xvf openshift-client-mac.tar   
+
+
+LOCATION=eastus 
+RESOURCEGROUP=aro-rg
+CLUSTER=cluster 
+
+az aro list-credentials \
+  --name $CLUSTER \
+  --resource-group $RESOURCEGROUP
+
+
+
+oc new-app https://github.com/cheruvu1/mslearn-aks-workshop-ratings-api --strategy=source --name=rating-api
+
+
