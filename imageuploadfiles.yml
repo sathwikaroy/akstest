@@ -28,5 +28,5 @@ stages:
             command: buildAndPush
             repository: employeecertification
             dockerfile: $(Build.SourcesDirectory)/WorkShop/CloudStack/employee-certifications/Dockerfile
-            containerRegistry: sampleacrserviceconn
-            tags: ${{parameters.tags}}
+            containerRegistry: acrsampletesteu2    # create service connection 
+            tags: ${{parameters.tags}} 
