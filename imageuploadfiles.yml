@@ -3,3 +3,34 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+trigger: none 
+pr: none
+ 
+variables:
+  - name: imageRepository
+    value: $(Build.SourcesDirectory)/Dockerfile
+
+parameters: 
+  - name: pool
+    type: string
+  - name: tags
+    type: string
+
+stages: 
+- stage: Image_build_and_ACR_push
+  displayName: Image build and ACR push
+  pool:
+    #name: ${{parameters.pool}}
+    vmImageName: 'ubuntu-latest'
+  jobs:
+  - job: build_and_Webpp_restart
+    displayName: build and Webpp restart
+    steps:
+        - task: Docker@2
+          displayName: Build and push an image to container registry apache
+          inputs:
+            command: buildAndPush
+            repository: apacheenv2
+            dockerfile: $(Build.SourcesDirectory)/Dockerfile.fe
+            containerRegistry: $(containerregistryconnection)
+            tags: ${{parameters.tags}}
