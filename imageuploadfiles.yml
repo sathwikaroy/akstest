@@ -6,10 +6,6 @@
 trigger: none 
 pr: none
  
-variables:
-  - name: imageRepository
-    value: $(Build.SourcesDirectory)/Dockerfile
-
 parameters: 
   - name: pool
     type: string
@@ -23,14 +19,14 @@ stages:
     #name: ${{parameters.pool}}
     vmImageName: 'ubuntu-latest'
   jobs:
-  - job: build_and_Webpp_restart
-    displayName: build and Webpp restart
+  - job: build_image
+    displayName: build image
     steps:
         - task: Docker@2
           displayName: Build and push an image to container registry apache
           inputs:
             command: buildAndPush
-            repository: apacheenv2
-            dockerfile: $(Build.SourcesDirectory)/Dockerfile.fe
-            containerRegistry: $(containerregistryconnection)
+            repository: employeecertification
+            dockerfile: $(Build.SourcesDirectory)/WorkShop/CloudStack/employee-certifications/Dockerfile
+            containerRegistry: sampleacrserviceconn
             tags: ${{parameters.tags}}
