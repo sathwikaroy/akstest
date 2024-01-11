@@ -16,8 +16,7 @@ stages:
 - stage: Image_build_and_ACR_push
   displayName: Image build and ACR push
   pool:
-    #name: ${{parameters.pool}}
-    vmImageName: 'ubuntu-latest'
+    vmImage: 'ubuntu-latest'
   jobs:
   - job: build_image
     displayName: build image
