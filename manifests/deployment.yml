@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: remadhuracrdemotest 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: remadhuracrdemotest
+  template:
+    metadata:
+      labels:
+        app: remadhuracrdemotest 
+    spec:
+      containers:
+        - name: remadhuracrdemotest 
+          image: acrsampletesteu2.azurecr.io/remadhuracrdemotest
+          ports:
+          - containerPort: 80
