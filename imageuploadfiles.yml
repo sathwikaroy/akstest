@@ -7,8 +7,8 @@ trigger: none
 pr: none
  
 parameters: 
-  - name: pool
-    type: string
+  # - name: pool
+  #   type: string
   - name: tags
     type: string
 
