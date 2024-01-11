@@ -34,7 +34,7 @@ stages:
           displayName: Build and push an image to container registry apache
           inputs:
             command: buildAndPush
-            repository: employeecertification
+            repository: employeeproducer
             dockerfile: $(Build.SourcesDirectory)/WorkShop/CloudStack/employee-producer/Dockerfile
             containerRegistry: acrsampletesteu2    # create service connection 
             tags: ${{parameters.tags}} 
