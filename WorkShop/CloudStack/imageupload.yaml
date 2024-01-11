@@ -1,0 +1,46 @@
+trigger: none 
+pr: none
+ 
+variables:
+  - group: ${{parameters.environment}}-vg
+  - name: imageRepository
+    value: $(Build.SourcesDirectory)/Dockerfile
+  - name: dockerfilePath
+
+    displayName: Apache Image build and ACR push
+  condition: or(eq('${{parameters.image_repository}}', 'apache_and_node'),eq('${{parameters.image_repository}}', 'apache'))
+  pool:
+    name: ${{parameters.pool}}
+  jobs:
+  - job: Apache_build_and_Webpp_restart
+    displayName: Apache build and Webpp restart
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          sudo chmod 666 /var/run/docker.sock
+    - powershell: |
+           $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+           Write-Host "##vso[task.setvariable variable=ImageTag]$timestamp"
+    - task: Bash@3
+      displayName: 'ACR imagebackup'
+      enabled: true
+      inputs:
+       targetType: 'inline'
+       script: |                 
+              az --version
+              az login --service-principal -u $(client-id) -p $(client-secret) --tenant $(tenant-id)
+              az account set --subscription "$(subscription-id)"
+              az aks get-credentials --resource-group $(rgname) --name $(aksname)
+              az acr repository show --name $(containerRegistry) --image apacheenv2:latest
+              az acr import --name $(containerRegistry) --source  $(containerRegistry)/apacheenv2:latest --username $(acr_username) --password $(acr_password) --image apacheenv2backup:$(ImageTag) --force
+              az acr repository show --name $(containerRegistry) --image apacheenv2backup:$(ImageTag)                       
+    - task: Docker@2
+      displayName: Build and push an image to container registry apache
+      inputs:
+        command: buildAndPush
+        repository: apacheenv2
+        dockerfile: $(Build.SourcesDirectory)/Dockerfile.fe
+        containerRegistry: $(containerregistryconnection)
+        tags: latest
