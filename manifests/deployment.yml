@@ -11,28 +11,3 @@ spec:
       image: acrsampletesteu2.azurecr.io/employeeproducer:4.25
       ports:
       - containerPort: 8000
-
-----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: employee-cert-pod
-  labels: 
-    app: employee-cert-label
-    type: employee-cert-service
-spec:
-  containers:
-    - name: employee-cert-pod
-      image: acrsampletesteu2.azurecr.io/employeecertification:4.25
-      ports:
-      - containerPort: 9000
-
-    -------
-kind: Pod
-apiVersion: v1
-metadata:
-  name: nginx
-spec:
-  containers:
-  - name: mypod
-    image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
