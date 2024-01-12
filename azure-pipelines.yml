@@ -10,9 +10,9 @@ resources:
 
 variables:
    - name: dockerRegistryServiceConnection
-     value: 
-   - name: k8sname
-     value: 
+     value: acrsampletesteu2
+   - name: k8sNamespace
+     value: employeeportal
    - name: imagepullsecret
      value: yIAZfIUQ2ISkMUTSE3xkP4xYJPRkY0sQou44JsunDV+ACRCxn75j
 
