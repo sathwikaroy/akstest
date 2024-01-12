@@ -28,11 +28,6 @@ stages:
   - job: Deploy
     displayName: Deploy
     steps:
-          - task: DownloadPipelineArtifact@2
-            inputs:
-              artifactName: 'manifests'
-              downloadPath: '$(System.ArtifactsDirectory)/manifests'
-
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
