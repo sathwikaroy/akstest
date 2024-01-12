@@ -26,3 +26,13 @@ spec:
       image: aksbyexampleacr.azurecr.us/employee-cert:1.0-amd64
       ports:
       - containerPort: 9000
+
+    -------
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: mypod
+    image: mcr.microsoft.com/oss/nginx/nginx:1.15.5-alpine
