@@ -32,16 +32,16 @@ stages:
             displayName: Create imagePullSecret
             inputs:
               action: createSecret
-              kubernetesServiceConnection: 'rg-demo-sample-test-aks-samplenamespace'
+              kubernetesServiceConnection: 'aksserconn'
               secretName: employee-img-secret
-              namespace: samplenamespace
-              dockerRegistryEndpoint: acrsampletesteu2
+              namespace: akatestname
+              dockerRegistryEndpoint: acrserconn
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
-              namespace: samplenamespace
-              kubernetesServiceConnection: 'rg-demo-sample-test-aks-samplenamespace'
+              namespace: akatestname
+              kubernetesServiceConnection: 'aksserconn'
               manifests: |
                 $(Build.SourcesDirectory)/manifests/deployment.yml
               imagePullSecrets: |
