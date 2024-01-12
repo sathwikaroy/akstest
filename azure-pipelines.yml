@@ -43,7 +43,7 @@ stages:
               namespace: samplenamespace
               kubernetesServiceConnection: 'rg-demo-sample-test-aks-samplenamespace'
               manifests: |
-                $(System.ArtifactsDirectory)/manifests/deployment.yml
+                $(Build.SourcesDirectory)/manifests/deployment.yml
               imagePullSecrets: |
                  $(imagePullSecret)
               # containers: |
