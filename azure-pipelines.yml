@@ -8,9 +8,6 @@ trigger:
 resources:
 - repo: self
 
-variables:
-
-
 
 stages:
 
