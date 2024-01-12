@@ -22,21 +22,33 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      vmImage: $(vmImageName)
+      vmImage: 'ubantu-latest'
     strategy:
       runOnce:
         deploy:
           steps:
-
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
+          ###copying files to artifact directory
+          - task: CopyFiles@2
             inputs:
-              action: deploy
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+              SourceFolder: '$(System.DefaultWorkingDirectory)'
+              Contents: '**/*.yaml'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)'
+           ##############publish artifact ############
+          - task: PublishBuildArtifacts@1
+            inputs:
+                pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+                artifactName: 'manifests'
+                publishLocation: 'Container'
+
+          # - task: KubernetesManifest@0
+          #   displayName: Deploy to Kubernetes cluster
+          #   inputs:
+          #     action: deploy
+          #     manifests: |
+          #       $(Pipeline.Workspace)/manifests/deployment.yml
+          #       $(Pipeline.Workspace)/manifests/service.yml
+          #     imagePullSecrets: |
+          #       $(imagePullSecret)
+          #     containers: |
+          #       $(containerRegistry)/$(imageRepository):4.25
 
