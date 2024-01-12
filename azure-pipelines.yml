@@ -22,15 +22,11 @@ stages:
   displayName: Deploy stage
 
   jobs:
-  - deployment: Deploy
+  - job: Deploy
     displayName: Deploy
     pool:
       vmImage: 'ubantu-latest'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-         
+    steps:
           - task: DownloadPipelineArtifact@2
             inputs:
               artifactName: 'manifests'
