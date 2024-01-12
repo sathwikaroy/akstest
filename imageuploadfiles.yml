@@ -39,4 +39,9 @@ stages:
             containerRegistry: acrsampletesteu2    # create service connection 
             tags: ${{parameters.tags}} 
         
+        - task: PublishBuildArtifacts@1
+          inputs:
+                pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+                artifactName: 'manifests'
+                publishLocation: 'Container'
         
