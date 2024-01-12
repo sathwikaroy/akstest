@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
     - name: employee-producer-pod
-      image: aksbyexampleacr.azurecr.us/employee-producer:1.0-amd64
+      image: acrsampletesteu2.azurecr.io/employeeproducer:4.25
       ports:
       - containerPort: 8000
 
@@ -23,7 +23,7 @@ metadata:
 spec:
   containers:
     - name: employee-cert-pod
-      image: aksbyexampleacr.azurecr.us/employee-cert:1.0-amd64
+      image: acrsampletesteu2.azurecr.io/employeecertification:4.25
       ports:
       - containerPort: 9000
 
