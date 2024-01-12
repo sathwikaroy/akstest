@@ -15,9 +15,9 @@ variables:
    - name: dockerRegistryServiceConnection
      value: acrsampletesteu2
    - name: k8sNamespace
-     value: employeeportal
+     value: rg-demo-sample-test-aks-samplenamespace
    - name: imagepullsecret
-     value: yIAZfIUQ2ISkMUTSE3xkP4xYJPRkY0sQou44JsunDV+ACRCxn75j
+     value: employee-img-secret
 
 stages:
 
