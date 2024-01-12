@@ -14,7 +14,7 @@ variables:
    - name: k8sname
      value: 
    - name: imagepullsecret
-     value: 
+     value: yIAZfIUQ2ISkMUTSE3xkP4xYJPRkY0sQou44JsunDV+ACRCxn75j
 
 stages:
 
